@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B4F9C525-5C56-440E-B4C2-972A33D7C8CD}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Huemanatee</RootNamespace>
+    <AssemblyName>Huemanatee</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy, Version=0.21.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Nancy.0.21.1\lib\net40\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Hosting.Aspnet, Version=0.21.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Nancy.Hosting.Aspnet.0.21.1\lib\net40\Nancy.Hosting.Aspnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.ViewEngines.Razor, Version=0.21.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Nancy.Viewengines.Razor.0.21.1\lib\net40\Nancy.ViewEngines.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Q42.HueApi">
+      <HintPath>..\packages\Q42.HueApi.1.5.0.42\lib\portable-net45+wp80+win81+wpa81\Q42.HueApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Q42.HueApi.NET">
+      <HintPath>..\packages\Q42.HueApi.Net.1.4.1.42\lib\net45\Q42.HueApi.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.20\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Razor.Unofficial">
+      <HintPath>..\packages\System.Web.Razor.Unofficial.2.0.2\lib\net40\System.Web.Razor.Unofficial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="content\css\bootstrap.css" />
+    <Content Include="content\css\bootstrap.min.css" />
+    <Content Include="content\css\plugins\dataTables.bootstrap.css" />
+    <Content Include="content\css\plugins\metisMenu\metisMenu.css" />
+    <Content Include="content\css\plugins\metisMenu\metisMenu.min.css" />
+    <Content Include="content\css\plugins\morris.css" />
+    <Content Include="content\css\plugins\social-buttons.css" />
+    <Content Include="content\css\plugins\timeline.css" />
+    <Content Include="content\css\sb-admin-2.css" />
+    <Content Include="content\css\style.css" />
+    <Content Include="content\font-awesome-4.1.0\css\font-awesome.css" />
+    <Content Include="content\font-awesome-4.1.0\css\font-awesome.min.css" />
+    <Content Include="content\font-awesome-4.1.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="content\fonts\fontawesome-webfont.svg" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="content\js\lib\bootstrap.js" />
+    <Content Include="content\js\lib\bootstrap.min.js" />
+    <Content Include="content\js\lib\jquery-1.11.0.js" />
+    <Content Include="content\js\lib\plugins\dataTables\dataTables.bootstrap.js" />
+    <Content Include="content\js\lib\plugins\dataTables\jquery.dataTables.js" />
+    <Content Include="content\js\lib\plugins\flot\excanvas.min.js" />
+    <Content Include="content\js\lib\plugins\flot\flot-data.js" />
+    <Content Include="content\js\lib\plugins\flot\jquery.flot.js" />
+    <Content Include="content\js\lib\plugins\flot\jquery.flot.pie.js" />
+    <Content Include="content\js\lib\plugins\flot\jquery.flot.resize.js" />
+    <Content Include="content\js\lib\plugins\flot\jquery.flot.tooltip.min.js" />
+    <Content Include="content\js\lib\plugins\metisMenu\metisMenu.js" />
+    <Content Include="content\js\lib\plugins\metisMenu\metisMenu.min.js" />
+    <Content Include="content\js\lib\plugins\morris\morris-data.js" />
+    <Content Include="content\js\lib\plugins\morris\morris.js" />
+    <Content Include="content\js\lib\plugins\morris\morris.min.js" />
+    <Content Include="content\js\lib\plugins\morris\raphael.min.js" />
+    <Content Include="content\js\lib\sb-admin-2.js" />
+    <Content Include="content\nancy-logo.png" />
+    <Content Include="content\js\lib\knockout-3.1.0.debug.js" />
+    <Content Include="content\js\lib\knockout-3.1.0.js" />
+    <None Include="content\js\lib\linq-vsdoc.js" />
+    <Content Include="content\js\lib\linq.js" />
+    <Content Include="content\js\lib\linq.min.js" />
+    <None Include="content\js\lib\jquery-1.6.4-vsdoc.js" />
+    <Content Include="content\js\lib\jquery-1.6.4.js" />
+    <Content Include="content\js\lib\jquery-1.6.4.min.js" />
+    <Content Include="content\js\lib\jquery.signalR-2.1.1.js" />
+    <Content Include="content\js\lib\jquery.signalR-2.1.1.min.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Data\HueDataContext.cs" />
+    <Compile Include="HueHelper.cs" />
+    <Compile Include="Modules\IndexModule.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\IndexModel.cs" />
+    <Compile Include="Modules\LightsModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <Content Include="views\layout.cshtml" />
+    <Content Include="views\index\index.cshtml" />
+    <Content Include="content\font-awesome-4.1.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="content\font-awesome-4.1.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="content\font-awesome-4.1.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="content\font-awesome-4.1.0\fonts\FontAwesome.otf" />
+    <Content Include="content\font-awesome-4.1.0\less\bordered-pulled.less" />
+    <Content Include="content\font-awesome-4.1.0\less\core.less" />
+    <Content Include="content\font-awesome-4.1.0\less\fixed-width.less" />
+    <Content Include="content\font-awesome-4.1.0\less\font-awesome.less" />
+    <Content Include="content\font-awesome-4.1.0\less\icons.less" />
+    <Content Include="content\font-awesome-4.1.0\less\larger.less" />
+    <Content Include="content\font-awesome-4.1.0\less\list.less" />
+    <Content Include="content\font-awesome-4.1.0\less\mixins.less" />
+    <Content Include="content\font-awesome-4.1.0\less\path.less" />
+    <Content Include="content\font-awesome-4.1.0\less\rotated-flipped.less" />
+    <Content Include="content\font-awesome-4.1.0\less\spinning.less" />
+    <Content Include="content\font-awesome-4.1.0\less\stacked.less" />
+    <Content Include="content\font-awesome-4.1.0\less\variables.less" />
+    <Content Include="content\font-awesome-4.1.0\scss\font-awesome.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_bordered-pulled.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_core.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_fixed-width.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_icons.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_larger.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_list.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_mixins.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_path.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_rotated-flipped.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_spinning.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_stacked.scss" />
+    <Content Include="content\font-awesome-4.1.0\scss\_variables.scss" />
+    <Content Include="content\fonts\fontawesome-webfont.eot" />
+    <Content Include="content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="content\fonts\fontawesome-webfont.woff" />
+    <Content Include="content\fonts\FontAwesome.otf" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="content\js\common\base.ts" />
+    <TypeScriptCompile Include="content\js\common\light.ts" />
+    <TypeScriptCompile Include="content\js\index\index.ts" />
+    <TypeScriptCompile Include="Scripts\typings\linq\linq.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59054</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:5555</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+if $(ConfigurationName) == Debug (
+xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.21.1\BuildProviders\Nancy.ViewEngines.Razor.BuildProviders.dll" "$(ProjectDir)bin\"
+xcopy /s /y /R "$(SolutionDir)packages\Nancy.Viewengines.Razor.0.21.1\lib\Net40\Nancy.ViewEngines.Razor.dll" "$(ProjectDir)bin\"
+)</PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

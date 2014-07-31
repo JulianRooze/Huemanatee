@@ -1,0 +1,1 @@
+{"version":3,"file":"base.js","sourceRoot":"","sources":["base.ts"],"names":["PageModel","PageModel.constructor","PageModel.selectLight"],"mappings":"AAAA;IAAAA;QACIC,KAAOA,aAAaA,GAA8BA,EAAEA,CAACA,UAAUA,CAAQA,CAACA,CAACA;IAK7EA,CAACA;AAAAD,IAHGA,kCAAAA,UAAmBA,KAAYA;QAC3BE,IAAIA,CAACA,aAAaA,CAACA,KAAKA,CAACA;IAC7BA,CAACA;IACLF,iBAACA;AAADA,CAACA,IAAA"}

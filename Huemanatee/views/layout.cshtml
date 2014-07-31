@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Huemanatee</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="/Content/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="/Content/css/sb-admin-2.css" rel="stylesheet">
+  <link href="/Content/css/style.css" rel="stylesheet">
+  <!-- Custom Fonts -->
+  <link href="/Content/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <script src="/content/js/lib/jquery-1.11.0.js"></script>
+  <script src="/content/js/lib/knockout-3.1.0.debug.js"></script>
+  <script src="/content/js/lib/linq.js"></script>
+
+  <script src="/content/js/common/base.js"></script>
+  <script src="/content/js/common/light.js"></script>
+
+</head>
+
+<body>
+
+  <div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Huemanatee</a>
+      </div>
+      <!-- /.navbar-header -->
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <li>
+              <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /.sidebar-collapse -->
+      </div>
+      <!-- /.navbar-static-side -->
+    </nav>
+
+    <div data-bind="with: selectedLight" class="modal fade" id="edit-light" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel" data-bind="text: name"></h4>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group input-group">     
+                <label data-bind="text: 'Saturation ' + state.saturation()">Saturation</label>
+                <input type="range" min="0" max="255" data-bind="value: state.saturation" />
+              </div>
+              <div class="form-group input-group">
+                <label data-bind="text: 'Brightness ' + state.brightness()">Brightness</label>
+                <input type="range" min="0" max="255" data-bind="value: state.brightness" />
+              </div>
+              <div class="form-group input-group">
+                <label data-bind="text: 'Hue ' + state.hue()">Hue</label>
+                <input type="range" min="0" max="65535" data-bind="value: state.hue" />
+              </div>
+              <div class="form-group input-group">
+                <label data-bind="text: 'Hex ' + state.hex()">Hex</label>
+                <input type="color" data-bind="value: state.hex" />
+              </div>
+              <div class="form-group input-group">
+                <label >On/off</label>
+                <input type="checkbox" data-bind="checked: state.on" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-bind="click: applyState">Apply</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">@(ViewBag.Title ?? "")</h1>
+          @RenderBody()
+        </div>
+        <!-- /.col-lg-12 -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+  <!-- jQuery Version 1.11.0 -->
+  <!-- Bootstrap Core JavaScript -->
+  <script src="/Content/js/lib/bootstrap.min.js"></script>
+
+  <!-- Custom Theme JavaScript -->
+  <script src="/Content/js/lib/sb-admin-2.js"></script>
+
+
+</body>
+
+</html>
+
