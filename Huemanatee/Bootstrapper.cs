@@ -5,21 +5,30 @@
   using Q42.HueApi;
   using System;
   using System.Linq;
+  using System.Security.Cryptography;
   using System.Threading;
 
   public class Bootstrapper : DefaultNancyBootstrapper
   {
     protected async override void ApplicationStartup(Nancy.TinyIoc.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
     {
-      HueHelper.Init();
+      await HueHelper.Init();
 
       using (var ctx = new HueDataContext())
       {
-        var bridges = await new Q42.HueApi.HttpBridgeLocator().LocateBridgesAsync(TimeSpan.FromMinutes(1));
+        var apiKey = ctx.Settings.SingleOrDefault(s => s.Key == "HueApiKey");
 
-        var bridge = bridges.Single();
+        HueClient client;
 
-        var client = HueHelper.GetClient();
+        if (apiKey == null)
+        {
+          client = await SaveApiKey(ctx);
+        }
+        else
+        {
+          HueHelper.SetApiKey(apiKey.Value);
+          client = HueHelper.GetClient();
+        }
 
         var lights = await client.GetLightsAsync();
 
@@ -44,6 +53,57 @@
         ctx.SaveChanges();
 
       }
+    }
+
+    private static async System.Threading.Tasks.Task<HueClient> SaveApiKey(HueDataContext ctx)
+    {
+      HueClient client;
+      var secret = GenerateApiKey();
+
+      client = HueHelper.GetClient();
+
+      var success = await client.RegisterAsync("Huemanatee", secret);
+
+      if (!success)
+      {
+        throw new InvalidOperationException("Registering API key not successful.");
+      }
+
+      HueHelper.SetApiKey(secret);
+
+      var setting = new Setting
+      {
+        Key = "HueApiKey",
+        Value = secret
+      };
+
+      ctx.Settings.Add(setting);
+
+      ctx.SaveChanges();
+
+      client.Initialize(secret);
+
+      return client;
+    }
+
+    private const string _chars = "0123456789";
+
+    public static string GenerateApiKey(int length = 12)
+    {
+      var bytes = new byte[length];
+
+      var random = new System.Security.Cryptography.RNGCryptoServiceProvider();
+
+      random.GetBytes(bytes);
+
+      var result = new char[bytes.Length];
+
+      for (var i = 0; i < bytes.Length; i++)
+      {
+        result[i] = _chars[bytes[i] % _chars.Length];
+      }
+
+      return new string(result);
     }
 
     protected async void Bla(Nancy.TinyIoc.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)

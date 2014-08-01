@@ -11,18 +11,34 @@ namespace Huemanatee
   public class HueHelper
   {
     private static string _ip;
+    private static string _apiKey;
 
-    public static async void Init()
+    public static async Task<string> Init()
     {
-      var bridges = await new Q42.HueApi.HttpBridgeLocator().LocateBridgesAsync(TimeSpan.FromMinutes(1));
+      var task = new Q42.HueApi.HttpBridgeLocator().LocateBridgesAsync(TimeSpan.FromMinutes(1));
+
+      var bridges = await task;
 
       _ip = bridges.Single();
+
+      return _ip;
+    }
+
+    public static void SetApiKey(string key)
+    {
+      _apiKey = key;
     }
 
     public static HueClient GetClient()
     {
-      var client = new HueClient(_ip, "frUwREPr3m");
-      return client;
+      if (_apiKey != null)
+      {
+        return new HueClient(_ip, _apiKey);
+      }
+      else
+      {
+        return new HueClient(_ip);
+      }
     }
   }
 }

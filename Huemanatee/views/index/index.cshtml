@@ -3,8 +3,8 @@
     Layout = "layout.cshtml";
 }
 
-<ul data-bind="foreach: lights">
-  <li><i data-bind="click: requestEdit, style: { color: '#' + state.hex() }" class="fa fa-lightbulb-o fa-3x"></i><span data-bind="text: name"></span></li>
+<ul class="fa-ul" data-bind="foreach: lights">
+  <li><i data-bind="click: requestEdit, style: { color: '#' + state.hex() }" class="fa fa-lightbulb-o fa-3x"></i><button class="btn btn-default" data-bind="click: requestEdit, text: name, style: { color: '#' + state.hex() }"></button></li>
 </ul>
 
 <button data-bind="click: toggleLights" class="btn btn-default" type="button">Toggle all lights</button>

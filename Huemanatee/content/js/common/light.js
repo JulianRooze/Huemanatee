@@ -2,7 +2,7 @@
     function LightState(light, data) {
         var _this = this;
         this._hexChanged = false;
-        this._isDirty = ko.observable(false).extend({ rateLimit: { timeout: 500, method: "notifyWhenChangesStop" } });
+        this._isDirty = ko.observable(false).extend({ rateLimit: { timeout: 500 } });
         this.brightness = ko.observable(data.brightness);
         this.hue = ko.observable(data.hue);
         this.saturation = ko.observable(data.saturation);
@@ -15,17 +15,28 @@
 
         var isDirtySubscribers = [this.brightness, this.hue, this.saturation, this.on, this.hex];
 
+        var timeout = null;
+
         Enumerable.from(isDirtySubscribers).forEach(function (el, i) {
             return el.subscribe(function (newVal) {
-                return _this._isDirty(true);
+                /*console.log('subscriber dirty: ' + this._isDirty());
+                this._isDirty(!this._isDirty());*/
+                if (timeout != null) {
+                    clearTimeout(timeout);
+                }
+
+                timeout = setTimeout(function () {
+                    light.applyState(_this);
+                }, 500);
             });
         });
 
         this._isDirty.subscribe(function (newVal) {
+            console.log('dirty: ' + _this._isDirty());
             if (_this._isDirty()) {
                 light.applyState(_this);
-                _this._isDirty(false);
             }
+            _this._isDirty(false);
         });
     }
     LightState.prototype.serialize = function () {
@@ -43,16 +54,15 @@
 })();
 
 var Light = (function () {
-    function Light(data, model) {
+    function Light(data) {
         this.id = data.id;
         this.name = data.name;
         this.state = new LightState(this, data.state);
-        this.model = model;
     }
     Light.loadAllLightsAsync = function (model) {
         return $.get('/lights/all', null, 'json').then(function (data) {
             var lights = Enumerable.from(data).select(function (l) {
-                return new Light(l, model);
+                return new Light(l);
             }).toArray();
             return lights;
         });
@@ -63,16 +73,19 @@ var Light = (function () {
     };
 
     Light.prototype.requestEdit = function () {
-        this.model.selectLight(this);
+        this.editRequested(this);
         $('#edit-light').modal('show');
     };
 
     Light.prototype.applyState = function (state) {
+        var _this = this;
         return $.ajax('/lights/' + this.id + '/state/apply', {
             type: 'POST',
             data: state.serialize(),
             contentType: 'application/json',
             dataType: 'json'
+        }).then(function (data) {
+            return _this.stateApplied(_this);
         });
     };
     return Light;

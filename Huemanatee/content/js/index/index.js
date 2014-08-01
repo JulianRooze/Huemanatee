@@ -17,6 +17,15 @@ var IndexModel = (function (_super) {
 
         promise.then(function (lights) {
             _this.lights(lights);
+
+            Enumerable.from(lights).forEach(function (item, i) {
+                item.editRequested = function (x) {
+                    return _this.selectLight(x);
+                };
+                item.stateApplied = function (x) {
+                    return _this.loadLights();
+                };
+            });
         });
     };
 

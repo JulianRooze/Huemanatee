@@ -1,3 +1,8 @@
 ﻿.form-group input[type="range"] {
   width: 300px;
 }
+
+ul.lights-list1  li {
+  list-style: none;
+  height: 50px;
+}
