@@ -12,6 +12,8 @@
   {
     protected async override void ApplicationStartup(Nancy.TinyIoc.TinyIoCContainer container, Nancy.Bootstrapper.IPipelines pipelines)
     {
+      log4net.Config.XmlConfigurator.Configure();
+
       await HueHelper.Init();
 
       using (var ctx = new HueDataContext())
@@ -54,7 +56,7 @@
 
       }
     }
-
+    
     private static async System.Threading.Tasks.Task<HueClient> SaveApiKey(HueDataContext ctx)
     {
       HueClient client;

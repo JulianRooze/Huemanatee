@@ -1,29 +1,47 @@
-﻿class IndexModel extends PageModel {
+﻿module Index {
 
-    public lights: KnockoutObservableArray<Light> = ko.observableArray([]);
+    export class IndexModel extends Base.PageModel {
 
-    constructor() {
-        super();
-        this.loadLights();
-    }
+        public lights: KnockoutObservableArray<Light> = ko.observableArray([]);
 
-    private loadLights() {
+        constructor() {
+            super();
+            this.loadLights();
+            this.lights.subscribe(newVal => {
+                console.log('lights changed ' + newVal);
+            });
+        }
 
-        var promise = Light.loadAllLightsAsync(this);
+        private loadLights() {
 
-        promise.then((lights) => {
-          this.lights(lights);
+            var promise = Light.loadAllLightsAsync();
 
-          Enumerable.from(lights).forEach((item: Light, i) => {
-            item.editRequested = (x) => this.selectLight(x);
-            item.stateApplied = (x) => this.loadLights();
-          });
-        });
-    }
+            var self = this;
+            
+            promise.then((lights) => {
+                self.lights(lights);
 
-    public toggleLights() {
-        Light.toggleAllLightsAsync().then(_ => this.loadLights());
+                console.log('promise.then ' + (self === this));
+
+                Enumerable.from(lights).forEach((item: Light, i) => {
+
+                    console.log('forEach ' + (self === this));
+
+                    item.editRequested = (x) => self.selectLight(x);
+
+                    item.stateApplied = (x) => {
+                        console.log('stateApplied ' + (self === this));
+
+                        self.loadLights();
+                    };
+                });
+            });
+        }
+
+        public toggleLights() {
+            Light.toggleAllLightsAsync().then(_ => this.loadLights());
+        }
     }
 }
 
-ko.applyBindings(new IndexModel());
+ko.applyBindings(new Index.IndexModel());

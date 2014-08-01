@@ -59,7 +59,7 @@ var Light = (function () {
         this.name = data.name;
         this.state = new LightState(this, data.state);
     }
-    Light.loadAllLightsAsync = function (model) {
+    Light.loadAllLightsAsync = function () {
         return $.get('/lights/all', null, 'json').then(function (data) {
             var lights = Enumerable.from(data).select(function (l) {
                 return new Light(l);

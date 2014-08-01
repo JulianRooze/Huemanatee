@@ -22,6 +22,11 @@
           return View["index", model];
         }
       };
+
+      Get["/webgl"] = parameters =>
+      {
+        return View["webgl"];
+      };
     }
   }
 }

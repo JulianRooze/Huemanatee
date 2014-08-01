@@ -5,11 +5,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Nancy.ModelBinding;
+using System.Threading.Tasks;
+using log4net;
 
 namespace Huemanatee.Modules
 {
   public class LightsModule : NancyModule
   {
+    private ILog log = LogManager.GetLogger("LightsModule");
+
     public LightsModule()
       : base("/lights/")
     {
@@ -19,21 +23,63 @@ namespace Huemanatee.Modules
 
         var lights = await client.GetLightsAsync();
 
-        var data = (from l in lights
-                    let state = l.State
-                    select new
-                    {
-                      id = l.Id,
-                      name = l.Name,
-                      state = new
-                      {
-                        brightness = state.Brightness,
-                        @on = state.On,
-                        saturation = state.Saturation,
-                        hue = state.Hue,
-                        hex = state.ToHex()
-                      }
-                    });
+        var lightsData = from l in lights
+                         let state = l.State
+                         select new
+                         {
+                           id = l.Id,
+                           name = l.Name,
+                           state = new
+                           {
+                             brightness = state.Brightness,
+                             @on = state.On,
+                             saturation = state.Saturation,
+                             hue = state.Hue,
+                             hex = state.ToHex()
+                           }
+                         };
+
+        var anyOn = lightsData.Any(l => l.state.on);
+
+        var brightestLight = lightsData.Where(l => l.state.on).OrderByDescending(l => l.state.brightness).FirstOrDefault();
+
+        var allLight = new[] 
+        {
+          new
+          {
+            id = "all",
+            name = "All",
+            state = new
+            {
+              brightness = brightestLight != null ? brightestLight.state.brightness : (byte)0,
+              @on = anyOn,
+              saturation = brightestLight != null ? brightestLight.state.saturation : 0,
+              hue = brightestLight != null ? brightestLight.state.hue : 0,
+              hex = brightestLight != null ? brightestLight.state.hex : "000000"
+            }
+          }
+        };
+
+        var data = allLight.Union(lightsData);
+
+
+        Task.Run(async () =>
+        {
+
+          for (var i = 0; i < 10; i++)
+          {
+            var allLights = await client.GetLightsAsync();
+
+            var x = allLights.Single(l => l.Id == "4");
+
+            var coords = string.Join(", ", x.State.ColorCoordinates);
+
+            log.DebugFormat("GET " + coords + " " + x.State.ToHex());
+
+            await Task.Delay(1000);
+          }
+
+        });
 
         return data;
 
@@ -82,8 +128,33 @@ namespace Huemanatee.Modules
             command.SetColor(data.Hex);
           }
 
-          await client.SendCommandAsync(command, new[] { id });
+          if (id == "all")
+          {
+            await client.SendCommandAsync(command);
+          }
+          else
+          {
+            await client.SendCommandAsync(command, new[] { id });
+          }
         }
+
+        Task.Run(async () =>
+        {
+
+          for (var i = 0; i < 10; i++)
+          {
+            var allLights = await client.GetLightsAsync();
+
+            var x = allLights.Single(l => l.Id == "4");
+
+            var coords = string.Join(", ", x.State.ColorCoordinates);
+
+            log.DebugFormat("APPLY " + coords + " " + x.State.ToHex());
+
+            await Task.Delay(1000);
+          }
+
+        });
 
         return new
         {

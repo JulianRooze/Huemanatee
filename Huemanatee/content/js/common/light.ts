@@ -76,7 +76,7 @@ class Light {
     this.state = new LightState(this, data.state);
   }
 
-  public static loadAllLightsAsync(model: PageModel): JQueryPromise<Light[]> {
+  public static loadAllLightsAsync(): JQueryPromise<Light[]> {
 
     return $.get('/lights/all', null, 'json').then(data => {
       var lights = Enumerable.from(<any[]>data).select(l => new Light(l)).toArray();

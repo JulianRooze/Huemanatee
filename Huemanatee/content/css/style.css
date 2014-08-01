@@ -2,7 +2,26 @@
   width: 300px;
 }
 
-ul.lights-list1  li {
+ul.lights-list1 li {
   list-style: none;
   height: 50px;
+}
+
+.light-box {
+  background-color: #f5f5f5;
+  border-radius: 0px;
+  margin-bottom: 20px;
+  min-height: 20px;
+  padding: 19px;
+  /*background-image: radial-gradient(25px at 20px 50%, rgba(255, 255, 255, 1) 30px, rgba(255, 255, 255, 0) 90px);*/
+}
+
+.light-name {
+  font-size: 2em;
+  vertical-align: middle;
+}
+
+.light-icon {
+  vertical-align: middle;
+  padding-right: 20px;
 }
