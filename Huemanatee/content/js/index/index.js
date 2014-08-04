@@ -10,39 +10,7 @@ var Index;
         __extends(IndexModel, _super);
         function IndexModel() {
             _super.call(this);
-            this.lights = ko.observableArray([]);
-            this.loadLights();
-            this.lights.subscribe(function (newVal) {
-                console.log('lights changed ' + newVal);
-            });
         }
-        IndexModel.prototype.loadLights = function () {
-            var _this = this;
-            var promise = Light.loadAllLightsAsync();
-
-            var self = this;
-
-            promise.then(function (lights) {
-                self.lights(lights);
-
-                console.log('promise.then ' + (self === _this));
-
-                Enumerable.from(lights).forEach(function (item, i) {
-                    console.log('forEach ' + (self === _this));
-
-                    item.editRequested = function (x) {
-                        return self.selectLight(x);
-                    };
-
-                    item.stateApplied = function (x) {
-                        console.log('stateApplied ' + (self === _this));
-
-                        self.loadLights();
-                    };
-                });
-            });
-        };
-
         IndexModel.prototype.toggleLights = function () {
             var _this = this;
             Light.toggleAllLightsAsync().then(function (_) {

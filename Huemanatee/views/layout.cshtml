@@ -25,11 +25,13 @@
   <script src="/content/js/lib/linq.js"></script>
 
   <script src="/content/js/common/base.js"></script>
+  <script src="/content/js/common/background.js"></script>
   <script src="/content/js/common/light.js"></script>
 
 </head>
 
 <body>
+  <canvas style="position: fixed;" id="canvas"></canvas>
 
   <div id="wrapper">
 
@@ -49,7 +51,7 @@
         <div class="sidebar-nav navbar-collapse">
           <ul class="nav" id="side-menu">
             <li>
-              <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+              <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
           </ul>
         </div>
@@ -102,7 +104,6 @@
     <div id="page-wrapper">
       <div class="row">
         <div class="col-lg-12">
-          <h1 class="page-header">@(ViewBag.Title ?? "")</h1>
           @RenderBody()
         </div>
         <!-- /.col-lg-12 -->
@@ -120,6 +121,39 @@
   <!-- Custom Theme JavaScript -->
   <script src="/Content/js/lib/sb-admin-2.js"></script>
 
+ 
+  <script src="/content/js/lib/jquery.signalR-2.1.1.min.js" type="text/javascript"></script>
+  <script src="/signalr/hubs" type="text/javascript"></script>
+
+  @Html.Partial("shaders");
+
+  <script type="text/javascript">
+
+    var startHub = function () {
+
+      var lightsHub = $.connection.lightsHub;
+
+      lightsHub.client.lightsChanged = function () {
+
+        Base.PageModel.currentPageModel().loadLights();
+
+        setTimeout(function () {
+          Base.PageModel.currentPageModel().loadLights();
+        }, 3000);
+      };
+
+      $.connection.hub.start();
+    };
+
+    var canvasEl = document.getElementById('canvas');
+
+    var renderer = new Background.Renderer(canvasEl);
+
+    startHub();
+
+    renderer.render();
+
+  </script>
 
 </body>
 

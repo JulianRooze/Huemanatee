@@ -154,7 +154,6 @@
     <Content Include="content\js\lib\plugins\morris\morris.min.js" />
     <Content Include="content\js\lib\plugins\morris\raphael.min.js" />
     <Content Include="content\js\lib\sb-admin-2.js" />
-    <Content Include="content\js\lib\webgl-utils.js" />
     <Content Include="content\nancy-logo.png" />
     <Content Include="content\js\lib\knockout-3.1.0.debug.js" />
     <Content Include="content\js\lib\knockout-3.1.0.js" />
@@ -222,6 +221,7 @@
     <Content Include="content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="views\index\webgl.cshtml" />
+    <Content Include="views\shaders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -230,6 +230,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="content\js\common\background.ts" />
     <TypeScriptCompile Include="content\js\common\base.ts" />
     <TypeScriptCompile Include="content\js\common\light.ts" />
     <TypeScriptCompile Include="content\js\index\index.ts" />

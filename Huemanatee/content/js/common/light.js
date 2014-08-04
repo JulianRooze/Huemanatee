@@ -55,6 +55,10 @@
 
 var Light = (function () {
     function Light(data) {
+        this.stateApplied = function () {
+        };
+        this.editRequested = function () {
+        };
         this.id = data.id;
         this.name = data.name;
         this.state = new LightState(this, data.state);

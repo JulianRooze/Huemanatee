@@ -67,8 +67,8 @@ class Light {
   public id: string;
   public name: string;
 
-  public stateApplied: (light: Light) => void;
-  public editRequested: (light: Light) => void;
+  public stateApplied: (light: Light) => void = () => { };
+  public editRequested: (light: Light) => void = () => { };
 
   constructor(data: any) {
     this.id = data.id;

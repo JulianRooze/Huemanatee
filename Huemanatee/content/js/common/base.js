@@ -3,10 +3,31 @@
     var PageModel = (function () {
         function PageModel() {
             this.selectedLight = ko.observable();
+            this.lights = ko.observableArray([]);
+            PageModel.currentPageModel(this);
+
+            this.loadLights();
         }
         PageModel.prototype.selectLight = function (light) {
             this.selectedLight(light);
         };
+
+        PageModel.prototype.loadLights = function () {
+            var promise = Light.loadAllLightsAsync();
+
+            var self = this;
+
+            promise.then(function (lights) {
+                self.lights(lights);
+
+                Enumerable.from(lights).forEach(function (item, i) {
+                    item.editRequested = function (x) {
+                        return self.selectLight(x);
+                    };
+                });
+            });
+        };
+        PageModel.currentPageModel = ko.observable(null);
         return PageModel;
     })();
     Base.PageModel = PageModel;
@@ -25,7 +46,7 @@
         function Helpers() {
         }
         Helpers.getBackgroundColorForLightState = function (state) {
-            return Helpers.hexToRgbaString('#' + state.hex(), 0.4);
+            return Helpers.hexToRgbaString('#' + state.hex(), 0.2);
         };
 
         Helpers.lightStateToRadialGradient = function (state) {
@@ -39,7 +60,7 @@
             step2 = brightness / 5;
             step3 = brightness / 2;
 
-            return 'radial-gradient(' + step1 + 'px at 30px 40%, rgba(255, 255, 255, 1) ' + step2 + 'px, rgba(255, 255, 255, 0)' + step3 + 'px)';
+            return 'radial-gradient(' + step1 + 'px at 41px 40%, rgba(255, 255, 255, 1) ' + step2 + 'px, rgba(255, 255, 255, 0)' + step3 + 'px)';
         };
 
         Helpers.hexToRgbaString = function (hex, opacity) {

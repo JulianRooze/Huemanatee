@@ -1,4 +1,8 @@
-﻿.form-group input[type="range"] {
+﻿body {
+    background-color: black;
+}
+
+.form-group input[type="range"] {
   width: 300px;
 }
 
@@ -13,7 +17,8 @@ ul.lights-list1 li {
   margin-bottom: 20px;
   min-height: 20px;
   padding: 19px;
-  /*background-image: radial-gradient(25px at 20px 50%, rgba(255, 255, 255, 1) 30px, rgba(255, 255, 255, 0) 90px);*/
+  cursor: pointer;
+  padding-left: 30px;
 }
 
 .light-name {
@@ -25,3 +30,44 @@ ul.lights-list1 li {
   vertical-align: middle;
   padding-right: 20px;
 }
+
+nav {
+  background-color: transparent !important;
+}
+
+.sidebar {
+  background-color: transparent !important;
+}
+
+.navbar-default {
+  border: 0;
+}
+
+.navbar-static-top {
+  padding-bottom: 20px;
+}
+
+.sidebar ul li {
+  border: none;
+}
+
+.page-header {
+  border: 0;
+}
+
+ul.nav li {
+  font-size: 2em;
+  
+}
+
+ul.nav li a {
+  color: White;
+  padding-left: 20px;
+}
+
+a.navbar-brand {
+  color: white !important;
+  font-size: 4em;
+  padding: 20px;
+}
+

@@ -7,6 +7,8 @@ using System.Web;
 using Nancy.ModelBinding;
 using System.Threading.Tasks;
 using log4net;
+using Microsoft.AspNet.SignalR;
+using Huemanatee.Hubs;
 
 namespace Huemanatee.Modules
 {
@@ -62,27 +64,7 @@ namespace Huemanatee.Modules
 
         var data = allLight.Union(lightsData);
 
-
-        Task.Run(async () =>
-        {
-
-          for (var i = 0; i < 10; i++)
-          {
-            var allLights = await client.GetLightsAsync();
-
-            var x = allLights.Single(l => l.Id == "4");
-
-            var coords = string.Join(", ", x.State.ColorCoordinates);
-
-            log.DebugFormat("GET " + coords + " " + x.State.ToHex());
-
-            await Task.Delay(1000);
-          }
-
-        });
-
         return data;
-
       };
 
       Post["/all/toggle", true] = async (_, token) =>
@@ -98,6 +80,10 @@ namespace Huemanatee.Modules
         var command = new LightCommand();
         command.On = !turnOff;
         await client.SendCommandAsync(command, lights.Select(l => l.Id));
+
+        var hub = GlobalHost.ConnectionManager.GetHubContext<LightsHub>();
+
+        hub.Clients.All.lightsChanged();
 
         return new
         {
@@ -138,23 +124,9 @@ namespace Huemanatee.Modules
           }
         }
 
-        Task.Run(async () =>
-        {
+        var hub = GlobalHost.ConnectionManager.GetHubContext<LightsHub>();
 
-          for (var i = 0; i < 10; i++)
-          {
-            var allLights = await client.GetLightsAsync();
-
-            var x = allLights.Single(l => l.Id == "4");
-
-            var coords = string.Join(", ", x.State.ColorCoordinates);
-
-            log.DebugFormat("APPLY " + coords + " " + x.State.ToHex());
-
-            await Task.Delay(1000);
-          }
-
-        });
+        hub.Clients.All.lightsChanged();
 
         return new
         {
