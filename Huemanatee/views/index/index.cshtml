@@ -8,7 +8,7 @@
     <div class="col-lg-3">
       <div class="light-box" data-bind="click: requestEdit, style: { 'backgroundColor': state.on() ? Base.Helpers.getBackgroundColorForLightState(state) : 'rgb(220,220,220)', backgroundImage : state.on() ? Base.Helpers.lightStateToRadialGradient(state) : ''}">
         <i data-bind="click: requestEdit, style: { color: state.on() ? '#' + state.hex() : 'rgb(180,180,180)' }" class="light-icon fa fa-lightbulb-o fa-3x"></i>
-        <span class="light-name" data-bind="text: name, style: { color: state.on() ? '#' + state.hex() : 'rgb(180,180,180)' }"></span>
+        <span class="light-name" data-bind="text: name, style: { color: state.on() ? Base.Helpers.getForegroundColorForLightState(state) : 'rgb(180,180,180)' }"></span>
       </div>
     </div>
   </div>

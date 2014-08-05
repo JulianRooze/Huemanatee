@@ -40,21 +40,26 @@
 
   export class Helpers {
 
+    public static getForegroundColorForLightState(state: LightState): string {
+
+      var rgb = Helpers.hexToRgb(state.hex());
+
+      var scale = 2;
+
+      return Helpers.rgbToHex(Math.min(rgb.r * scale, 255), Math.min(rgb.g * scale, 255), Math.min(rgb.b * scale, 255));
+    }
+
     public static getBackgroundColorForLightState(state: LightState): string {
-      return Helpers.hexToRgbaString('#' + state.hex(), 0.2);
+      return Helpers.hexToRgbaString('#' + state.hex(), 0.5);
     }
 
     public static lightStateToRadialGradient(state: LightState): string {
 
       var brightness = state.brightness();
 
-      var step1 = 35;
-      var step2 = 50;
-      var step3 = 120;
-
-      step1 = brightness / 8;
-      step2 = brightness / 5;
-      step3 = brightness / 2;
+      var step1 = brightness / 23;
+      var step2 = brightness / 15;
+      var step3 = brightness / 10
 
       return 'radial-gradient(' + step1 + 'px at 41px 40%, rgba(255, 255, 255, 1) ' + step2 + 'px, rgba(255, 255, 255, 0)' + step3 + 'px)';
     }
@@ -63,7 +68,7 @@
       var rgb = Helpers.hexToRgb(hex);
 
       if (rgb == null) {
-        debugger;
+        //debugger;
       }
 
       return 'rgba(' + rgb.r + ',' + rgb.g + ',' + rgb.b + ',' + opacity + ')';
@@ -78,7 +83,7 @@
     }
 
     public static rgbToHex(r, g, b): string {
-      return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+      return "#" + ((1 << 24) + (Math.floor(r) << 16) + (Math.floor(g) << 8) + Math.floor(b)).toString(16).slice(1);
     }
   }
 }

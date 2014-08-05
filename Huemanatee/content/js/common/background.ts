@@ -59,8 +59,8 @@
       var currentSize = 9;
       var sizeSign = 1;
 
-      var attenuationExponentAnimator = new LightAttenuationAnimator(9, 7, 12, 0.1);
-      var attenuationLinearAnimator = new LightAttenuationAnimator(0.1, 0.05, 0.15, 0.005);
+      var attenuationExponentAnimator = new LightAttenuationAnimator(9, 7, 20, 2);
+      var attenuationLinearAnimator = new LightAttenuationAnimator(0.1, 0.05, 0.15, 0.05);
       var attenuationConstantAnimator = new LightAttenuationAnimator(0.6, 0.5, 0.9, 0.05);
 
       var renderFrame = (now) => {
