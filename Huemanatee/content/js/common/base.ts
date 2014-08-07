@@ -10,6 +10,14 @@
       PageModel.currentPageModel(this);
 
       this.loadLights();
+
+      var self = this;
+
+      setInterval(() => {
+
+        self.loadLights();
+
+      }, 1000 * 60);
     }
 
     public selectLight(light: Light) {

@@ -7,6 +7,12 @@
             PageModel.currentPageModel(this);
 
             this.loadLights();
+
+            var self = this;
+
+            setInterval(function () {
+                self.loadLights();
+            }, 1000 * 60);
         }
         PageModel.prototype.selectLight = function (light) {
             this.selectedLight(light);
