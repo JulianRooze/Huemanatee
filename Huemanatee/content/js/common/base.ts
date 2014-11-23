@@ -33,7 +33,7 @@
       promise.then((lights) => {
         self.lights(lights);
 
-        Enumerable.from(lights).forEach((item: Light, i) => {
+        Enumerable.from(lights).forEach((item: Light, i : number) => {
           item.editRequested = (x) => self.selectLight(x);
         });
       });
@@ -90,7 +90,7 @@
         parseInt(result[3], 16)) : null;
     }
 
-    public static rgbToHex(r, g, b): string {
+    public static rgbToHex(r : number, g : number, b : number): string {
       return "#" + ((1 << 24) + (Math.floor(r) << 16) + (Math.floor(g) << 8) + Math.floor(b)).toString(16).slice(1);
     }
   }

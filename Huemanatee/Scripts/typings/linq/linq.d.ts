@@ -33,7 +33,7 @@ declare module linqjs {
         rangeDown(start: number, count: number, step?: number): IEnumerable<number>;
         rangeTo(start: number, to: number, step?: number): IEnumerable<number>;
         repeat<T>(element: T, count?: number): IEnumerable<T>;
-        repeatWithFinalize<T>(initializer: () => T, finalizer: (element) => void ): IEnumerable<T>;
+        repeatWithFinalize<T>(initializer: () => T, finalizer: (element : T) => void ): IEnumerable<T>;
         generate<T>(func: () => T, count?: number): IEnumerable<T>;
         toInfinity(start?: number, step?: number): IEnumerable<number>;
         toNegativeInfinity(start?: number, step?: number): IEnumerable<number>;

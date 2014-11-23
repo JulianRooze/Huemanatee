@@ -19,8 +19,10 @@
       this.currentValue += this.sign * ((deltaT / 1000) * this.speed);
 
       if (this.currentValue >= this.maxValue) {
+        this.currentValue = this.maxValue
         this.sign *= -1;
       } else if (this.currentValue <= this.minValue) {
+        this.currentValue = this.minValue
         this.sign *= -1;
       }
 
@@ -36,6 +38,7 @@
     private lightColorsArray: Float32Array = new Float32Array(this.maxLights * 4);
     private gl: WebGLRenderingContext;
     private program: WebGLProgram;
+    private renderLoopId: number;
 
     private lightPos: { [id: string]: LightPosition } = {};
 
@@ -45,6 +48,22 @@
         this.createLightData(lights);
       });
 
+      canvas.addEventListener('webglcontextlost', (ev) => {
+        ev.preventDefault();
+
+        this.restart();
+
+      }, false);
+
+    }
+
+    public stop(): void {
+      cancelAnimationFrame(this.renderLoopId);
+    }
+
+    public restart(): void {
+      this.stop();
+      this.render();
     }
 
     public render(): void {
@@ -63,7 +82,7 @@
       var attenuationLinearAnimator = new LightAttenuationAnimator(0.1, 0.05, 0.15, 0.05);
       var attenuationConstantAnimator = new LightAttenuationAnimator(0.6, 0.5, 0.9, 0.05);
 
-      var renderFrame = (now) => {
+      var renderFrame = (now : number) => {
 
         var deltaT = now - currentTime;
 
@@ -80,10 +99,10 @@
 
         currentTime = now;
 
-        window.requestAnimationFrame(renderFrame);
+        this.renderLoopId = window.requestAnimationFrame(renderFrame);
       };
 
-      window.requestAnimationFrame(renderFrame);
+      this.renderLoopId = window.requestAnimationFrame(renderFrame);
     }
 
     private createLightData(lights: Light[]): void {
@@ -196,7 +215,7 @@
         k = k.nextSibling;
       }
 
-      var shader;
+      var shader : WebGLShader;
       if (shaderScript.type == "x-shader/x-fragment") {
         shader = gl.createShader(gl.FRAGMENT_SHADER);
       } else if (shaderScript.type == "x-shader/x-vertex") {

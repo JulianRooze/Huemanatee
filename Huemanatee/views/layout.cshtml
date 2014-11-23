@@ -127,33 +127,7 @@
 
   @Html.Partial("shaders");
 
-  <script type="text/javascript">
-
-    var startHub = function () {
-
-      var lightsHub = $.connection.lightsHub;
-
-      lightsHub.client.lightsChanged = function () {
-
-        Base.PageModel.currentPageModel().loadLights();
-
-        setTimeout(function () {
-          Base.PageModel.currentPageModel().loadLights();
-        }, 3000);
-      };
-
-      $.connection.hub.start();
-    };
-
-    var canvasEl = document.getElementById('canvas');
-
-    var renderer = new Background.Renderer(canvasEl);
-
-    startHub();
-
-    renderer.render();
-
-  </script>
+  <script type="text/javascript" src="/content/js/layout/layout.js"></script>
 
 </body>
 

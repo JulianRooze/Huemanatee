@@ -36,12 +36,10 @@
 
     var isDirtySubscribers = [this.brightness, this.hue, this.saturation, this.on, this.hex];
 
-    var timeout = null;
+    var timeout : number = null;
 
-    Enumerable.from(isDirtySubscribers).forEach((el: any, i) => el.subscribe(newVal => {
-      /*console.log('subscriber dirty: ' + this._isDirty());
-      this._isDirty(!this._isDirty());*/
-
+    Enumerable.from(isDirtySubscribers).forEach((el: any, i : number) => el.subscribe((newVal : any) => {
+     
       if (timeout != null) {
         clearTimeout(timeout);
       }
